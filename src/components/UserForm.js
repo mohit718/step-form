@@ -51,14 +51,14 @@ export default function Checkout() {
         return (
           <UserDetailsForm
           form={form}
-          setForm={setForm}
+          handleChange={handleChange}
           />
         );
         case 1:
         return (
           <PersonalDetailsForm
           form={form}
-          setForm={setForm}
+          handleChange={handleChange}
           />
         );
         case 2:
@@ -67,9 +67,17 @@ export default function Checkout() {
         return <Typography variant="h6">Unable to Fetch. Try again later.</Typography>    }
   };
 
-  const handleStep = index => {
-    setActiveStep(index);
+  const handleNext = () => {
+    (activeStep<steps.length-1)? setActiveStep(activeStep+1) : handleFinish()
   };
+
+  const handleBack = () => {
+    (activeStep>0) && setActiveStep(activeStep - 1);
+  };
+
+  const handleChange = input => e => {
+    setForm({...form, [input]:e.target.value});
+  }
 
   const handleFinish = () => {
     console.log(form);
@@ -77,15 +85,6 @@ export default function Checkout() {
     setForm(initForm);
     // Service call to backend
   }
-
-  const handleNext = () => {
-    (activeStep<steps.length-1)?setActiveStep(activeStep + 1):handleFinish()
-  };
-
-  const handleBack = () => {
-    if(activeStep>0)
-        setActiveStep(activeStep - 1);
-  };
 
   return (
     <>
@@ -109,7 +108,7 @@ export default function Checkout() {
             <Stepper nonLinear activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
               {steps.map((label, index) => (
                 <Step key={index}>
-                  <StepButton onClick={() => handleStep(index)}>
+                  <StepButton onClick={() => setActiveStep(index)}>
                     {label}
                   </StepButton>
                 </Step>

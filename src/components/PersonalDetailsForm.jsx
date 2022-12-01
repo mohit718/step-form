@@ -1,7 +1,7 @@
 import { Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-export default function PersonalDetailsForm({form, setForm}) {
+export default function PersonalDetailsForm({form, handleChange}) {
   return (
     <>
       <Grid container spacing={3}>
@@ -14,7 +14,7 @@ export default function PersonalDetailsForm({form, setForm}) {
             autoComplete="given-name"
             variant="standard"
             value={form.organisation}
-            onChange={e=>setForm({...form, organisation:e.target.value})}
+            onChange={handleChange('organisation')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -26,7 +26,7 @@ export default function PersonalDetailsForm({form, setForm}) {
             autoComplete="given-name"
             variant="standard"
             value={form.city}
-            onChange={e=>setForm({...form, city:e.target.value})}
+            onChange={handleChange('city')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -38,7 +38,7 @@ export default function PersonalDetailsForm({form, setForm}) {
             autoComplete="given-bio"
             variant="standard"
             value={form.bio}
-            onChange={e=>setForm({...form, bio:e.target.value})}
+            onChange={handleChange('bio')}
           />
         </Grid>
       </Grid>

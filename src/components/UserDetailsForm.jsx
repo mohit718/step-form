@@ -1,7 +1,7 @@
 import { Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-export default function UserDetailsForm({form, setForm}) {
+export default function UserDetailsForm({form, handleChange}) {
 
  return (
     <form id='userForm'>
@@ -16,7 +16,7 @@ export default function UserDetailsForm({form, setForm}) {
             autoComplete="given-name"
             variant="standard"
             value={form.firstname}
-            onChange={e=>setForm({...form, firstname:e.target.value})}
+            onChange={handleChange('firstname')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -29,7 +29,7 @@ export default function UserDetailsForm({form, setForm}) {
             autoComplete="given-name"
             variant="standard"
             value={form.lastname}
-            onChange={e=>setForm({...form, lastname:e.target.value})}
+            onChange={handleChange('lastname')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -42,7 +42,7 @@ export default function UserDetailsForm({form, setForm}) {
             autoComplete="given-email"
             variant="standard"
             value={form.email}
-            onChange={e=>setForm({...form, email:e.target.value})}
+            onChange={handleChange('email')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -55,10 +55,11 @@ export default function UserDetailsForm({form, setForm}) {
             autoComplete="phone"
             variant="standard"
             value={form.contact}
-            onChange={e=>setForm({...form, contact:e.target.value})}
+            onChange={handleChange('contact')}
           />
         </Grid>
       </Grid>
+      
     </form>
   );
 }
